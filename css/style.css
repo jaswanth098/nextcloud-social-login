@@ -16,7 +16,7 @@ a[href*="/sociallogin/oauth/"]::after {
 a[href*="/sociallogin/oauth/facebook"]::before {
   background-image: url(../img/facebook.svg);
 }
-a[href*="/sociallogin/oauth/google"]::before {
+a[href*="/sociallogin/oauth/Google"]::before {
   background-image: url(../img/google.svg);
 }
 a[href*="/sociallogin/oauth/amazon"]::before {
