@@ -85,10 +85,12 @@ class LoginController extends Controller
             'facebook' => 'email, public_profile',
         ];
         $config = [];
-        $providers = json_decode($this->config->getAppValue($this->appName, 'oauth_providers', '[]'), true);
-        if (is_array($providers) && in_array($provider, array_keys($providers))) {
+	$providers = json_decode($this->config->getAppValue($this->appName, 'oauth_providers', '[]'), true);
+	// Below condition is tweaked to only work with google please do not use it for any other social logins
+        if (is_array($providers) && in_array(strtolower($provider), array_keys($providers))) {
             foreach ($providers as $name => $prov) {
-                if ($name === $provider) {
+		// Below condition is tweaked to only work with google please do not use it for any other social logins
+                if ($name === strtolower($provider)) {
                     $callbackUrl = $this->urlGenerator->linkToRouteAbsolute($this->appName.'.login.oauth', ['provider' => $provider]);
                     $config = [
                         'callback' => $callbackUrl,
