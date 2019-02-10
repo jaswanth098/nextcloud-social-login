@@ -263,11 +263,16 @@ class LoginController extends Controller
         $profileId = preg_replace('#.*/#', '', rtrim($profile->identifier, '/'));
         if (empty($profileId)) {
             throw new LoginException($this->l->t('Can not get identifier from provider'));
-        }
-        $uid = $provider.'-'.$profileId;
+	}
+	$email = (string)$profile->email;
+	$uid = str_replace("@deepcompute.com", "", $email);
         if (strlen($uid) > 64) {
             $uid = $provider.'-'.md5($profileId);
-        }
+	}
+	$user = $this->userManager->get($uid);
+	if(null !== $user){
+	  $uid = $uid.'-'.(string)$profileId;
+	}
         return $this->login($uid, $profile);
     }
 

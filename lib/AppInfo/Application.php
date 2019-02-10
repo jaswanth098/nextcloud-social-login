@@ -73,9 +73,10 @@ class Application extends App
         if (is_array($providers)) {
             foreach ($providers as $name => $provider) {
                 if ($provider['appid']) {
-                    ++$this->providersCount;
+		    ++$this->providersCount;
+                    # Changed below provider from $name to Google as there is a problem with google login
                     $this->providerUrl = $this->urlGenerator->linkToRoute($this->appName.'.login.oauth', [
-                        'provider' => $name,
+                        'provider' => "Google",
                         'login_redirect_url' => $this->redirectUrl
                     ]);
                     \OC_App::registerLogIn([
